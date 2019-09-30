@@ -1,0 +1,40 @@
+<div class="d-flex p-2 justify-content-center w-100">
+    <div class="d-flex flex-column p-2 page-container">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title d-flex justify-content-between">
+                    <h5>Consultant Rating</h5>
+                    <span class="font-weight-bold">
+                        <span>Total Score: {{totalScore}}</span>
+                    </span>
+                </div>
+
+                <div class="p-2">
+                    <div *ngIf="questions$ | async as questions">
+                        <div *ngIf="questionsFormArray">
+                            <div *ngFor="let questionFormGroup of questionsFormGoups" [formGroup]="questionFormGroup"
+                                [ngSwitch]="questionFormGroup.value.type">
+                                <div class="d-flex align-items-center" *ngSwitchCase="1">
+                                    <ngb-rating class="star-rating text-success" formControlName="answer" max="5">
+                                    </ngb-rating>
+                                    <span class="px-2">{{questionFormGroup.get('text').value}} 
+                                    </span>
+                                </div>
+                                <div class="py-2" *ngSwitchCase="2">
+                                    <div class="form-group py-2">
+                                        <label class="pl-2 pr-1">{{questionFormGroup.get('text').value}}</label>
+                                        <span class="text-danger font-weight-bold" *ngIf="questionIsRequried(questionFormGroup.value)">*</span>
+                                        <small *ngIf="!questionIsRequried(questionFormGroup.value)" class="text-muted">[optional]</small>
+                                        <textarea class="form-control" formControlName="answer" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button [disabled]="!questionsFormArray.valid" (click)="onSubmit()"
+                                class="btn btn-success float-right p-1 px-5">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

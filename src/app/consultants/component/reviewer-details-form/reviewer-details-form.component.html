@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Reviewer Details</h4>
+    <button type="button" class="close" (click)="close()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="form-group" [formGroup]="reviewerDetailsForm">
+        <div class="py-2 row">
+            <div class="col">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter email">
+                <small class="text-danger" *ngIf="hasError('email','required')">
+                    Email is required
+                </small>
+                <small class="text-danger" *ngIf="hasError('email','email')">
+                    please wirte a valid email
+                </small>
+            </div>
+            <div class="col">
+                <label>Membership number</label>
+                <input type="number" formControlName="membershipNumber" class="form-control"
+                    placeholder="Membership number">
+                <small class="text-danger" *ngIf="hasError('membershipNumber','membershipNumberShouldBe8')">
+                    please wirte a valid membership number
+                </small>
+            </div>
+        </div>
+        <div class="py-2 row">
+            <div class="col">
+                <label>First name</label>
+                <input type="text" formControlName="firstName" class="form-control" placeholder="First name">
+            </div>
+            <div class="col">
+                <label>Last name</label>
+                <input type="text" formControlName="lastName" class="form-control" placeholder="Last name">
+            </div>
+        </div>
+        <div class="py-2 row">
+            <div class="col d-flex align-items-end">
+                <mat-checkbox formControlName="isAnonymous">Mark as Anonymous review</mat-checkbox>
+            </div>
+            <div class="col d-flex align-items-end">
+                <mat-checkbox formControlName="isAlias">
+                    Set Alias name
+                </mat-checkbox>
+            </div>
+        </div>
+        <div class="py-2 row" *ngIf="reviewerDetailsForm.get('isAlias').value">
+            <div class="col d-flex align-items-end">
+            </div>
+            <div class="col">
+                <label>Alias name</label>
+                <input type="text" formControlName="aliasName" class="form-control" placeholder="Alias name">
+            </div>
+        </div>
+        {{formHasError()}}
+        <div class="alert alert-danger" *ngIf="formHasError()" role="alert">
+            It's required to enter first and last name and/or membership number.
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" [disabled]="!reviewerDetailsForm.valid" (click)="onSubmit()" class="btn btn-outline-success px-5">Save</button>
+    <button type="button" class="btn btn-outline-dark px-5" (click)="close()">Cancel</button>
+</div>

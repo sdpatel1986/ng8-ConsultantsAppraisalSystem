@@ -1,0 +1,38 @@
+<div class="d-flex p-2 justify-content-center w-100">
+    <div class="d-flex flex-column p-2 page-container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Consultants</h5>
+
+                <div class="p-2">
+                    <table class="table table-responsive table-striped" *ngIf="consultants$ | async as consultants">
+                        <thead>
+                            <tr>
+                                <th scope="col">name</th>
+                                <th scope="col">email</th>
+                                <th scope="col">evaluations #</th>
+                                <th scope="col">average rating</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let consultant of consultants">
+                                <td>{{consultant.name}}</td>
+                                <td>{{consultant.email}}</td>
+                                <td>{{consultant.evaluations.length>0?consultant.evaluations.length:'-'}}</td>
+                                <td>
+                                    <ngb-rating *ngIf="consultant.evaluations.length>0" class="star-rating text-success"
+                                        [rate]="totalScoreAvg(consultant.evaluations)" [readonly]="true" max="5">
+                                    </ngb-rating>
+                                    <span *ngIf="consultant.evaluations.length==0">-</span>
+                                </td>
+                                <td><a href="#" [routerLink]="['/consultants',consultant.id,'evaluation']"
+                                        class="btn btn-primary">Rate Consultant</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
