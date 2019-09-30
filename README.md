@@ -1,6 +1,9 @@
-# ConsultantsAppraisalSystem
+# Consultants Appraisal System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
+- This project is for Consultant evaluation, consists mainly of 2 pages; this first one is a listing page to display consultants and the other is to evaluate consultant.
+- All the data used in this application is coming from json server which reads from `src/mocks/data.json` file.
+- In the consultant's page we display all the consultants in a list view and some details for each consultant and also no of evaluations with the average total score.
+- the evaluation page is loading questions from the mock server, and display these questions according to the question type. right now we only have two types of question (free-text question and rating question). After the user answers all the questions, we will calculate the total score based on the rating file and store the whole evaluation in the data.json file.
 
 ## Development server
 
